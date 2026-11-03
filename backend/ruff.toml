@@ -1,0 +1,10 @@
+line-length = 100
+target-version = "py312"
+extend-exclude = ["venv"]
+
+[lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["UP046", "UP047", "E402"]
+
+[lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends"]

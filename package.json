@@ -1,0 +1,26 @@
+{
+  "name": "supportagent-desk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered customer support triage with LLM function calling (Groq) and execution traces",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "install:all": "npm install && npm --prefix frontend install && node scripts/setup-backend.mjs",
+    "dev": "concurrently -n api,web -c blue,green --kill-others-on-fail \"node scripts/dev-backend.mjs\" \"node scripts/dev-frontend.mjs\"",
+    "dev:backend": "node scripts/dev-backend.mjs",
+    "dev:frontend": "node scripts/dev-frontend.mjs",
+    "build": "npm --prefix frontend run build",
+    "test": "node scripts/py.mjs -m pytest",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "node scripts/py.mjs -m ruff check .",
+    "lint:frontend": "npm --prefix frontend run lint",
+    "typecheck": "npm --prefix frontend run typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
