@@ -22,3 +22,4 @@ if (!existsSync(venvPython)) {
 console.log("Installing backend requirements");
 exec(venvPython, ["-m", "pip", "install", "--disable-pip-version-check", "-r", join(backendDir, "requirements.txt")]);
 console.log("Backend ready.");
+// ⚠️ NO process.exit(0) here — it must be allowed to return normally.

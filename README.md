@@ -1,24 +1,15 @@
 # SupportAgent Desk
 
-AI-powered customer support triage with **real function calling** and a full **execution trace** UI.
+AI-powered customer support triage (React + FastAPI + SQLite + Groq function calling).
 
-An operator opens a ticket and clicks **Run AI Triage Agent**. The backend lets the LLM decide — through real function calling — whether it needs order or account data, executes only registered and validated tools against the database, then returns a validated customer reply draft, a resolution tag, and a persisted, inspectable **Agent Execution Trace**.
+> Work in progress. The full README is added in the final commit.
 
-> No keyword routing. No ticket-ID routing. No canned replies. A brand-new ticket works the same way as the seeded ones.
+## Quick start
 
----
+```bash
+npm run install:all            # root + frontend deps, backend venv + pip install
+cp .env.example backend/.env   # PowerShell: Copy-Item .env.example backend/.env
+npm run dev                    # frontend http://localhost:5173, backend http://127.0.0.1:8000
+```
 
-## Architecture
-
-```mermaid
-flowchart LR
-  UI[React dashboard] -->|REST /api| API[FastAPI routes]
-  API --> SVC[Agent service<br/>atomic run lock]
-  SVC --> AG[Triage agent<br/>bounded loop]
-  AG -->|messages + tool declarations| LLM[(Groq API<br/>free tier)]
-  LLM -->|tool_calls| AG
-  AG --> REG[Tool registry<br/>validate + execute]
-  REG --> DB[(SQLite)]
-  AG -->|each event, as it happens| TR[(execution_traces)]
-  SVC --> DB
-  DB --> API
+Requires Node.js 20+ and Python 3.12+.
